@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.cuncisboss.shoppinglist.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -25,14 +26,14 @@ class ShoppingDaoTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var database: ShoppingItemDatabase
+
     private lateinit var dao: ShoppingDao
 
     @Before
     fun setup() {
-        database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            ShoppingItemDatabase::class.java
-        ).allowMainThreadQueries().build()       // because is not real database (RAM), not storage
+        database = Room.inMemoryDatabaseBuilder(ApplicationProvider.getApplicationContext(), ShoppingItemDatabase::class.java)
+            .allowMainThreadQueries()
+            .build()
         dao = database.shoppingDao()
     }
 

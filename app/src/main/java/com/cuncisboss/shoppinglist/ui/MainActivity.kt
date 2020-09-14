@@ -1,7 +1,8 @@
-package com.cuncisboss.shoppinglist
+package com.cuncisboss.shoppinglist.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.cuncisboss.shoppinglist.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
