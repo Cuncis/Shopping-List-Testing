@@ -15,6 +15,7 @@ import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions
 import com.cuncisboss.shoppinglist.R
 import com.cuncisboss.shoppinglist.adapter.ImageAdapter
+import com.cuncisboss.shoppinglist.adapter.ShoppingItemAdapter
 import com.cuncisboss.shoppinglist.getOrAwaitValue
 import com.cuncisboss.shoppinglist.launchFragmentInHiltContainer
 import com.cuncisboss.shoppinglist.repositories.FakeShoppingRepositoryAndroidTest
@@ -37,8 +38,9 @@ class ImagePickFragmentTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private lateinit var glide: RequestManager
+    private lateinit var shoppingAdapter: ShoppingItemAdapter
     private lateinit var imageAdapter: ImageAdapter
-    private lateinit var fragmentFactory: ShoppingFragmentFactory
+    private lateinit var fragmentFactoryTest: ShoppingFragmentFactoryTest
 
     @Before
     fun setup() {
@@ -48,8 +50,9 @@ class ImagePickFragmentTest {
                 .placeholder(R.drawable.ic_image)
                 .error(R.drawable.ic_broken_image)
         )
+        shoppingAdapter = ShoppingItemAdapter(glide)
         imageAdapter = ImageAdapter(glide)
-        fragmentFactory = ShoppingFragmentFactory(imageAdapter, glide)
+        fragmentFactoryTest = ShoppingFragmentFactoryTest(imageAdapter, glide, shoppingAdapter)
     }
 
     @Test
@@ -58,7 +61,7 @@ class ImagePickFragmentTest {
         val imageUrl = "TEST"
         val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
 
-        launchFragmentInHiltContainer<ImagePickFragment>(fragmentFactory = fragmentFactory) {
+        launchFragmentInHiltContainer<ImagePickFragment>(fragmentFactory = fragmentFactoryTest) {
             Navigation.setViewNavController(requireView(), navController)
             imageAdapter.images = listOf(imageUrl)
             viewModel = testViewModel

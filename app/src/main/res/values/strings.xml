@@ -8,4 +8,6 @@
     <string name="name">Name</string>
     <string name="image">image</string>
     <string name="search_for_images">Search for Images...</string>
+    <string name="price_3">Price: 3€</string>
+    <string name="_3x">3x</string>
 </resources>
