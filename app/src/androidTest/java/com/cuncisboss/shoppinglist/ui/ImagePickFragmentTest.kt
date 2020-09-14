@@ -1,12 +1,8 @@
 package com.cuncisboss.shoppinglist.ui
 
-import android.content.Context
-import android.content.pm.PackageManager
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
@@ -23,7 +19,6 @@ import com.cuncisboss.shoppinglist.getOrAwaitValue
 import com.cuncisboss.shoppinglist.launchFragmentInHiltContainer
 import com.cuncisboss.shoppinglist.repositories.FakeShoppingRepositoryAndroidTest
 import com.google.common.truth.Truth.assertThat
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
@@ -54,7 +49,7 @@ class ImagePickFragmentTest {
                 .error(R.drawable.ic_broken_image)
         )
         imageAdapter = ImageAdapter(glide)
-        fragmentFactory = ShoppingFragmentFactory(imageAdapter)
+        fragmentFactory = ShoppingFragmentFactory(imageAdapter, glide)
     }
 
     @Test
